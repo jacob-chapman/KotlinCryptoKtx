@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
@@ -24,6 +26,10 @@ android {
 }
 
 dependencies {
+    ext.kotlinCoroutineVersion = '1.1.0'
+    ext.retrofit_version = '2.5.0'
+    ext.moshi_version = '1.8.0'
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation 'androidx.appcompat:appcompat:1.0.2'
@@ -35,14 +41,19 @@ dependencies {
     implementation 'org.koin:koin-core:2.0.0'
 
     //Retrofit with kotlin coroutine support
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation "com.squareup.retrofit2:converter-moshi:2.5.0"
+    //Networking
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    api "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+    api "com.squareup.moshi:moshi:$moshi_version"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
+    api "com.squareup.moshi:moshi-kotlin:$moshi_version"
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2"
 
-    //Moshi
-    implementation 'com.squareup.moshi:moshi:1.8.0'
-    //Okhttp3
-    implementation 'com.squareup.okhttp3:okhttp:3.14.1'
+    //Android Lifecycle
     implementation 'androidx.lifecycle:lifecycle-livedata-core-ktx:2.2.0-alpha01'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0-alpha01'
+
+    //Kotlin Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutineVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutineVersion"
 }
