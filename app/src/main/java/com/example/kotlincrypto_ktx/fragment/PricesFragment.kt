@@ -1,5 +1,6 @@
 package com.example.kotlincrypto_ktx.fragment
 
+import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlincrypto_ktx.R
@@ -43,7 +45,16 @@ class PricesFragment : Fragment() {
         recyclerView.adapter = pricesAdapter
         recyclerView.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
 
+        val itemDecoration = ItemSpacing()
+        recyclerView.addItemDecoration(itemDecoration)
+
         return view
+    }
+
+    class ItemSpacing : RecyclerView.ItemDecoration() {
+        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+            outRect.bottom = 10
+        }
     }
 
 }

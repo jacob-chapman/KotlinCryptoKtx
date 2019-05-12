@@ -10,7 +10,6 @@
             android:id="@+id/prices_recycler_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@android:color/holo_blue_bright"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
