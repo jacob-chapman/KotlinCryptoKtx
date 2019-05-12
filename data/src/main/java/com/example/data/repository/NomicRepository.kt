@@ -15,7 +15,7 @@ class NomicRepository(private val nomicsApi: NomicsApi) : BaseRepository() {
                 call = { nomicsApi.getPrices().await() },
                 errorMessage = "Failed to get Prices from Network"
             )
-            emit(pricesResponse!!)
+            emit(pricesResponse!!.sortedByDescending { it.price.toFloat() })
         } catch (ex: Exception) {
             Log.d(this::class.java.simpleName, ex.message)
         }
