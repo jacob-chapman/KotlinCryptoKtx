@@ -1,6 +1,7 @@
 package com.example.kotlincrypto_ktx
 
 import android.app.Application
+import android.content.Context
 import com.example.data.di.DataModule
 import com.example.kotlincrypto_ktx.di.AppModule
 import com.example.kotlincrypto_ktx.viewmodel.CurrenciesViewModel

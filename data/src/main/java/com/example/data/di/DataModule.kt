@@ -1,6 +1,7 @@
 package com.example.data.di
 
 import com.example.data.api.NomicsApi
+import com.example.data.db.NomicsDb
 import com.example.data.repository.NomicRepository
 import com.example.data.util.NomicsInterceptor
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -39,7 +40,8 @@ class DataModule {
                 val retrofit by inject<Retrofit>(nomics_retrofit_base)
                 retrofit.create(NomicsApi::class.java) as NomicsApi
             }
-            single { NomicRepository(get()) }
+            single { NomicRepository(get(), get()) }
+            single { NomicsDb(get())}
         }
 
     }

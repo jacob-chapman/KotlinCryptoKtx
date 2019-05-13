@@ -24,6 +24,10 @@ class PricesFragment : Fragment() {
         }
     }
 
+    init {
+
+    }
+
     private val pricesAdapter : PriceAdapter = PriceAdapter()
     private lateinit var recyclerView : RecyclerView
 
@@ -31,10 +35,10 @@ class PricesFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        currenciesViewModel.loadCurrencies().observe(this) {
+        currenciesViewModel.currencyModels.observe(this) {
             pricesAdapter.currencies = it
             pricesAdapter.notifyDataSetChanged()
-            Log.d(this::class.qualifiedName, "updating data set")
+            Log.d(this::class.qualifiedName, "updating data set on ui adapter")
         }
     }
 
