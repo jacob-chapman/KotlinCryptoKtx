@@ -17,7 +17,7 @@ class CurrenciesViewModel(private val nomicRepository: NomicRepository) : ViewMo
     val currencyModels: LiveData<List<CurrencyModel>>
         get() = _currencyModels
 
-    private suspend  fun loadCurrencies() : LiveData<List<CurrencyModel>>{
+    suspend fun loadCurrencies() : LiveData<List<CurrencyModel>>{
             return nomicRepository.getPrices(viewModelScope.coroutineContext + Dispatchers.IO)
                 .map { list -> list
                     .sortedByDescending { it.price.toFloat() }
