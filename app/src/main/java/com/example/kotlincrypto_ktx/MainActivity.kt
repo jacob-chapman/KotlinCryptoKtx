@@ -3,6 +3,7 @@ package com.example.kotlincrypto_ktx
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import com.example.kotlincrypto_ktx.fragment.PricesFragment
 import com.example.kotlincrypto_ktx.viewmodel.CurrenciesViewModel
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
+        lifecycleScope
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
