@@ -17,13 +17,6 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        lifecycleScope
-        if (savedInstanceState == null) {
-            supportFragmentManager
-                .beginTransaction()
-                .add(R.id.root_layout, PricesFragment.newInstance(), "prices")
-                .commit()
-        }
     }
 
 }

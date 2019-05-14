@@ -6,6 +6,5 @@ import com.squareup.moshi.Json
 
 @Entity
 data class Currency (
-    @PrimaryKey(autoGenerate = true) val id: Int,
-    @field:Json(name="currency") val name: String,
+    @field:Json(name="currency") @PrimaryKey val name: String,
     val price: String)

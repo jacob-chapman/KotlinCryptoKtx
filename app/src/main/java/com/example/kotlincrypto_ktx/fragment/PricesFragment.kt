@@ -7,17 +7,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlincrypto_ktx.R
 import com.example.kotlincrypto_ktx.adapter.PriceAdapter
+import com.example.kotlincrypto_ktx.model.CurrencyModel
 import com.example.kotlincrypto_ktx.viewmodel.CurrenciesViewModel
 
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class PricesFragment : Fragment() {
+class PricesFragment : Fragment(), PriceAdapter.ClickListener {
 
     companion object {
         fun newInstance() : PricesFragment {
@@ -25,23 +30,12 @@ class PricesFragment : Fragment() {
         }
     }
 
-    private val pricesAdapter : PriceAdapter = PriceAdapter()
     private lateinit var recyclerView : RecyclerView
+    private val pricesAdapter : PriceAdapter = PriceAdapter(this)
 
     private val currenciesViewModel: CurrenciesViewModel by viewModel()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-        viewLifecycleOwner.lifecycle.coroutineScope.launchWhenStarted {
-            currenciesViewModel.loadCurrencies().observe(this@PricesFragment) {
-                pricesAdapter.currencies = it
-                pricesAdapter.notifyDataSetChanged()
-                Log.d(this::class.qualifiedName, "updating data set on ui adapter")
-            }
-        }
-
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = LayoutInflater.from(this.context).inflate(R.layout.fragment_prices, container, false)
@@ -54,6 +48,27 @@ class PricesFragment : Fragment() {
         recyclerView.addItemDecoration(itemDecoration)
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        lifecycleScope.launchWhenStarted {
+            currenciesViewModel.loadCurrencies().observe(this@PricesFragment) {
+                pricesAdapter.currencies = it
+                pricesAdapter.notifyDataSetChanged()
+                Log.d(this::class.qualifiedName, "updating data set on ui adapter")
+            }
+        }
+
+    }
+
+    override fun onCurrencyClicked(currencyModel: CurrencyModel) {
+        //todo add navigation here
+        Log.d("Clicked:", currencyModel.name)
+        val currencyName = currencyModel.name
+        val action = PricesFragmentDirections.pricesToDashboardTransaction(currencyName)
+        view!!.findNavController().navigate(action)
     }
 
     class ItemSpacing : RecyclerView.ItemDecoration() {

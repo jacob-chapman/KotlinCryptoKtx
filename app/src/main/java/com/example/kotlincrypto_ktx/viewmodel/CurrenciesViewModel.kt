@@ -10,13 +10,6 @@ import kotlinx.coroutines.plus
 
 class CurrenciesViewModel(private val nomicRepository: NomicRepository) : ViewModel() {
 
-    private var _currencyModels = liveData {
-        Log.d(this::class.qualifiedName, "getting source from viewmodel to repo")
-        emitSource(loadCurrencies())
-    }
-    val currencyModels: LiveData<List<CurrencyModel>>
-        get() = _currencyModels
-
     suspend fun loadCurrencies() : LiveData<List<CurrencyModel>>{
             return nomicRepository.getPrices(viewModelScope.coroutineContext + Dispatchers.IO)
                 .map { list -> list
