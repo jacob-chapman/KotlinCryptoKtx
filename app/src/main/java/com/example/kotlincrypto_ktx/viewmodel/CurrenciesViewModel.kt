@@ -1,20 +1,30 @@
 package com.example.kotlincrypto_ktx.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.*
-import com.example.data.repository.NomicRepository
+import com.example.domain.entity.Currency
+import com.example.domain.usecase.BaseUseCase
+import com.example.domain.usecase.GetPricesUseCase
+import com.example.domain.util.Failure
 import com.example.kotlincrypto_ktx.model.CurrencyModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.plus
 
-class CurrenciesViewModel(private val nomicRepository: NomicRepository) : ViewModel() {
+class CurrenciesViewModel(private val getPricesUseCase: GetPricesUseCase) : ViewModel() {
 
-    suspend fun loadCurrencies() : LiveData<List<CurrencyModel>>{
-            return nomicRepository.getPrices(viewModelScope.coroutineContext + Dispatchers.IO)
-                .map { list -> list
-                    .sortedByDescending { it.price.toFloat() }
-                    .map { CurrencyModel.get(it) } }
-
+    fun loadCurrencies() = liveData<List<CurrencyModel>> {
+        viewModelScope.launch {
+            getPricesUseCase.execute(BaseUseCase.None()).either(::handleError){
+                launch{
+                    emitSource(Transformations.map(it, ::handleSuccess))
+                }
+            }
+        }
     }
+
+    private fun handleSuccess(list: List<Currency>): List<CurrencyModel> {
+        return list.map { CurrencyModel.get(it) }
+    }
+
+    private fun handleError(failure: Failure){
+    }
+
 }

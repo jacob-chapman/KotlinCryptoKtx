@@ -31,8 +31,6 @@ android {
 }
 
 dependencies {
-    ext.kotlinCoroutineVersion = '1.1.0'
-
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -60,9 +58,10 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutineVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutineVersion"
 
-    implementation project(path: ':data')
     implementation 'androidx.fragment:fragment-ktx:1.1.0-alpha08'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.0.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.0.0'
+    implementation project(path: ':domain')
+    compile project(path: ':data')
 
 }

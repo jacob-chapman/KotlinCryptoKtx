@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
@@ -19,6 +20,8 @@ import com.example.kotlincrypto_ktx.R
 import com.example.kotlincrypto_ktx.adapter.PriceAdapter
 import com.example.kotlincrypto_ktx.model.CurrencyModel
 import com.example.kotlincrypto_ktx.viewmodel.CurrenciesViewModel
+import com.example.kotlincrypto_ktx.viewmodel.DataState
+import com.google.android.material.snackbar.Snackbar
 
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -54,17 +57,16 @@ class PricesFragment : Fragment(), PriceAdapter.ClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         lifecycleScope.launchWhenStarted {
-            currenciesViewModel.loadCurrencies().observe(this@PricesFragment) {
+            currenciesViewModel.loadCurrencies().observe(this@PricesFragment){
                 pricesAdapter.currencies = it
                 pricesAdapter.notifyDataSetChanged()
                 Log.d(this::class.qualifiedName, "updating data set on ui adapter")
             }
-        }
 
+        }
     }
 
     override fun onCurrencyClicked(currencyModel: CurrencyModel) {
-        //todo add navigation here
         Log.d("Clicked:", currencyModel.name)
         val currencyName = currencyModel.name
         val action = PricesFragmentDirections.pricesToDashboardTransaction(currencyName)
