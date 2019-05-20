@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/nav_main" app:startDestination="@id/pricesFragment">
+            android:id="@+id/nav_main"
+            app:startDestination="@id/mainHostFragment">
 
-    <fragment android:id="@+id/pricesFragment" android:name="com.example.kotlincrypto_ktx.fragment.PricesFragment"
-              android:label="PricesFragment">
-        <action android:id="@+id/pricesToDashboardTransaction" app:destination="@id/dashboardFragment"/>
-    </fragment>
-    <fragment android:id="@+id/dashboardFragment" android:name="com.example.kotlincrypto_ktx.fragment.DashboardFragment"
-              android:label="DashboardFragment">
-        <argument android:name="currency_name" app:argType="string"/>
-    </fragment>
+    <fragment android:id="@+id/mainHostFragment" android:name="com.example.kotlincrypto_ktx.fragment.MainHostFragment"
+              android:label="MainHostFragment"/>
 </navigation>

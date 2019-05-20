@@ -4,10 +4,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(foreignKeys = [ForeignKey(entity = Currency::class,
-    parentColumns = arrayOf("name"),
-    childColumns = arrayOf("currency"))]
-)
+@Entity
 data class Dashboard(
     @PrimaryKey(autoGenerate = true) val id : Int,
     val currency: String,

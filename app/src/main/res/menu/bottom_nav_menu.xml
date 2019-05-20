@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/pricesFragment"
+        android:title="@string/prices_livedata"
+        android:icon="@drawable/home"/>
+    <item
+        android:id="@+id/pricesNonLiveFragment"
+        android:title="@string/prices_nonlive"
+        android:icon="@drawable/plus_one"/>
+</menu>
