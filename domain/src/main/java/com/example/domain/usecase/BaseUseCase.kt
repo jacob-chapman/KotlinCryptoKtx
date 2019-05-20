@@ -9,7 +9,7 @@ import kotlin.coroutines.CoroutineContext
 //todo test viewModelScope with println
 abstract class BaseUseCase<out T, in Params> where T: Any {
 
-    private var scope = CoroutineScope(Dispatchers.Default)
+    private var scope = CoroutineScope(Dispatchers.IO)
 
     abstract suspend fun execute(params: Params): Either<Failure, T>
 

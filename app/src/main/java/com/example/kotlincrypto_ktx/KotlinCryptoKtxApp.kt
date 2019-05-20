@@ -2,7 +2,9 @@ package com.example.kotlincrypto_ktx
 
 import android.app.Application
 import com.example.data.di.DataModule
-import com.example.domain.usecase.GetPricesUseCase
+import com.example.domain.usecase.GetPricesLiveDataUseCase
+import com.example.domain.usecase.GetPricesNonLiveDataUseCase
+import com.example.kotlincrypto_ktx.viewmodel.CurrenciesNonLiveViewModel
 import com.example.kotlincrypto_ktx.viewmodel.CurrenciesViewModel
 import com.example.kotlincrypto_ktx.viewmodel.DashboardViewModel
 import org.koin.android.ext.koin.androidContext
@@ -15,8 +17,10 @@ class KotlinCryptoKtxApp : Application() {
 
     private val module = module {
         viewModel { CurrenciesViewModel(get()) }
+        viewModel { CurrenciesNonLiveViewModel(get()) }
         viewModel { DashboardViewModel(get()) }
-        factory { GetPricesUseCase(get()) }
+        factory { GetPricesLiveDataUseCase(get()) }
+        factory { GetPricesNonLiveDataUseCase(get()) }
     }
 
     override fun onCreate() {

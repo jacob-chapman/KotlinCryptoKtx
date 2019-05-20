@@ -6,5 +6,7 @@ import com.example.domain.util.Either
 import com.example.domain.util.Failure
 
 interface PricesRepository {
-    suspend fun loadPrices() : Either<Failure, LiveData<List<Currency>>>
+    suspend fun loadPricesLive() : Either<Failure, LiveData<List<Currency>>>
+
+    suspend fun loadPricesNonLive() : Either<Failure, List<Currency>>
 }

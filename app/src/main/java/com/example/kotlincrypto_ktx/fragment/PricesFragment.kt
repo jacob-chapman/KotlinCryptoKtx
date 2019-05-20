@@ -29,7 +29,6 @@ class PricesFragment : Fragment(), PriceAdapter.ClickListener {
 
     private lateinit var recyclerView : RecyclerView
     private val pricesAdapter : PriceAdapter = PriceAdapter(this)
-
     private val currenciesViewModel: CurrenciesViewModel by viewModel()
 
 
