@@ -44,7 +44,7 @@ class PricesNonLiveFragment : Fragment(), PriceAdapter.ClickListener {
             currenciesViewModel.currencyModels.observe(this@PricesNonLiveFragment){
                 pricesAdapter.currencies = it
                 pricesAdapter.notifyDataSetChanged()
-                Log.d(this::class.qualifiedName, "updating data set on ui adapter")
+                Log.d(this::class.java.canonicalName, "updating data set on ui adapter")
             }
         }
     }

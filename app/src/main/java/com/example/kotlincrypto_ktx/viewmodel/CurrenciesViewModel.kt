@@ -13,7 +13,7 @@ class CurrenciesViewModel(private val getPricesLiveDataUseCase: GetPricesLiveDat
 
     fun loadCurrencies() = liveData<List<CurrencyModel>> {
         viewModelScope.launch {
-            getPricesLiveDataUseCase.execute(RepoParams(true, liveUpdate = true)).either(::handleError){
+            getPricesLiveDataUseCase.execute(RepoParams(true, scope = viewModelScope, liveUpdate = true)).either(::handleError){
                 launch{
                     emitSource(Transformations.map(it, ::handleSuccess))
                 }
