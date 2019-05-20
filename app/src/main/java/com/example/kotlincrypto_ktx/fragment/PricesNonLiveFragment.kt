@@ -40,7 +40,7 @@ class PricesNonLiveFragment : Fragment(), PriceAdapter.ClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         lifecycleScope.launchWhenStarted{
-            currenciesViewModel.load()
+            currenciesViewModel.load(true)
             currenciesViewModel.currencyModels.observe(this@PricesNonLiveFragment){
                 pricesAdapter.currencies = it
                 pricesAdapter.notifyDataSetChanged()
