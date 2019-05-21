@@ -13,7 +13,10 @@
 
     <fragment android:id="@+id/pricesNonLiveFragment"
               android:name="com.example.kotlincrypto_ktx.fragment.PricesNonLiveFragment"
-              android:label="PricesNonLiveFragment"/>
+              android:label="PricesNonLiveFragment">
+        <action android:id="@+id/pricesNonLiveToDashboardTransaction"
+                app:destination="@id/dashboardFragment"/>
+    </fragment>
 
     <fragment android:id="@+id/dashboardFragment"
               android:name="com.example.kotlincrypto_ktx.fragment.DashboardFragment"
