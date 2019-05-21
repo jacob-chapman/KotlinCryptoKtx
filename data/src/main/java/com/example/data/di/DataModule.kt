@@ -4,6 +4,7 @@ import com.example.data.api.NomicsApi
 import com.example.data.db.NomicsDb
 import com.example.data.repository.NomicRepository
 import com.example.data.util.NomicsInterceptor
+import com.example.domain.repository.PricesRepository
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import org.koin.core.module.Module
@@ -42,6 +43,8 @@ class DataModule {
             }
             single { NomicRepository(get(), get()) }
             single { NomicsDb(get())}
+
+            single { NomicRepository(get(), get()) as PricesRepository }
         }
 
     }

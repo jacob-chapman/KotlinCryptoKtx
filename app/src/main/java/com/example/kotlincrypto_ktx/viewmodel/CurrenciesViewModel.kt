@@ -1,27 +1,31 @@
 package com.example.kotlincrypto_ktx.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.*
-import com.example.data.repository.NomicRepository
+import com.example.domain.entity.Currency
+import com.example.domain.params.RepoParams
+import com.example.domain.usecase.BaseUseCase
+import com.example.domain.usecase.GetPricesLiveDataUseCase
+import com.example.domain.util.Failure
 import com.example.kotlincrypto_ktx.model.CurrencyModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.plus
 
-class CurrenciesViewModel(private val nomicRepository: NomicRepository) : ViewModel() {
+class CurrenciesViewModel(private val getPricesLiveDataUseCase: GetPricesLiveDataUseCase) : ViewModel() {
 
-    private var _currencyModels = liveData {
-        Log.d(this::class.qualifiedName, "getting source from viewmodel to repo")
-        emitSource(loadCurrencies())
+    fun loadCurrencies() = liveData<List<CurrencyModel>> {
+        viewModelScope.launch {
+            getPricesLiveDataUseCase.execute(RepoParams(true, scope = viewModelScope, liveUpdate = true)).either(::handleError){
+                launch{
+                    emitSource(Transformations.map(it, ::handleSuccess))
+                }
+            }
+        }
     }
-    val currencyModels: LiveData<List<CurrencyModel>>
-        get() = _currencyModels
 
-    suspend fun loadCurrencies() : LiveData<List<CurrencyModel>>{
-            return nomicRepository.getPrices(viewModelScope.coroutineContext + Dispatchers.IO)
-                .map { list -> list
-                    .sortedByDescending { it.price.toFloat() }
-                    .map { CurrencyModel.get(it) } }
-
+    private fun handleSuccess(list: List<Currency>): List<CurrencyModel> {
+        return list.map { CurrencyModel.get(it) }
     }
+
+    private fun handleError(failure: Failure){
+    }
+
 }
