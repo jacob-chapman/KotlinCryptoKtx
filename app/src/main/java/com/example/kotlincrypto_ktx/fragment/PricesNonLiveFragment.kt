@@ -52,7 +52,7 @@ class PricesNonLiveFragment : Fragment(), PriceAdapter.ClickListener {
     override fun onCurrencyClicked(currencyModel: CurrencyModel) {
         Log.d("Clicked:", currencyModel.name)
         val currencyName = currencyModel.name
-        val action = PricesFragmentDirections.pricesToDashboardTransaction(currencyName)
+        val action = PricesNonLiveFragmentDirections.pricesNonLiveToDashboardTransaction(currencyName)
         view!!.findNavController().navigate(action)
     }
 }
