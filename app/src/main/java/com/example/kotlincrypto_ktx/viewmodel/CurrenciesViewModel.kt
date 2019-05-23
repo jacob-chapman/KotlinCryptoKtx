@@ -7,6 +7,7 @@ import com.example.domain.usecase.BaseUseCase
 import com.example.domain.usecase.GetPricesLiveDataUseCase
 import com.example.domain.util.Failure
 import com.example.kotlincrypto_ktx.model.CurrencyModel
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
 class CurrenciesViewModel(private val getPricesLiveDataUseCase: GetPricesLiveDataUseCase) : ViewModel() {
@@ -28,4 +29,7 @@ class CurrenciesViewModel(private val getPricesLiveDataUseCase: GetPricesLiveDat
     private fun handleError(failure: Failure){
     }
 
+    fun stopLiveUpdating(){
+        viewModelScope.cancel()
+    }
 }
