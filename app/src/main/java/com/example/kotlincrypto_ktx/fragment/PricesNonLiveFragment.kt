@@ -9,12 +9,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlincrypto_ktx.R
 import com.example.kotlincrypto_ktx.adapter.PriceAdapter
 import com.example.kotlincrypto_ktx.model.CurrencyModel
 import com.example.kotlincrypto_ktx.viewmodel.CurrenciesNonLiveViewModel
+import kotlinx.coroutines.cancel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PricesNonLiveFragment : Fragment(), PriceAdapter.ClickListener {
@@ -40,7 +44,7 @@ class PricesNonLiveFragment : Fragment(), PriceAdapter.ClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         lifecycleScope.launchWhenStarted{
-            currenciesViewModel.load(true)
+            currenciesViewModel.load(false)
             currenciesViewModel.currencyModels.observe(this@PricesNonLiveFragment){
                 pricesAdapter.currencies = it
                 pricesAdapter.notifyDataSetChanged()
@@ -52,7 +56,7 @@ class PricesNonLiveFragment : Fragment(), PriceAdapter.ClickListener {
     override fun onCurrencyClicked(currencyModel: CurrencyModel) {
         Log.d("Clicked:", currencyModel.name)
         val currencyName = currencyModel.name
-        val action = PricesNonLiveFragmentDirections.pricesNonLiveToDashboardTransaction(currencyName)
+        val action = PricesNonLiveFragmentDirections.actionPricesNonLiveFragmentToDashboardFragmentMain(currencyModel.name)
         view!!.findNavController().navigate(action)
     }
 }

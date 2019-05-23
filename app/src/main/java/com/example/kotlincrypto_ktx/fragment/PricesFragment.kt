@@ -9,13 +9,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
+import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kotlincrypto_ktx.MainActivity
 import com.example.kotlincrypto_ktx.R
 import com.example.kotlincrypto_ktx.adapter.PriceAdapter
 import com.example.kotlincrypto_ktx.model.CurrencyModel
 import com.example.kotlincrypto_ktx.viewmodel.CurrenciesViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -54,6 +58,7 @@ class PricesFragment : Fragment(), PriceAdapter.ClickListener {
                 pricesAdapter.currencies = it
                 pricesAdapter.notifyDataSetChanged()
                 Log.d(this::class.java.canonicalName, "updating data set on ui adapter")
+                Log.d("PricesFragment", lifecycle.currentState.toString())
             }
 
         }
@@ -61,8 +66,7 @@ class PricesFragment : Fragment(), PriceAdapter.ClickListener {
 
     override fun onCurrencyClicked(currencyModel: CurrencyModel) {
         Log.d("Clicked:", currencyModel.name)
-        val currencyName = currencyModel.name
-        val action = PricesFragmentDirections.pricesToDashboardTransaction(currencyName)
+        val action = PricesFragmentDirections.actionPricesFragmentToNavDashboard(currencyModel.name)
         view!!.findNavController().navigate(action)
     }
 

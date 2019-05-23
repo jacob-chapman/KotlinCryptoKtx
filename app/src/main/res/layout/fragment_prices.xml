@@ -6,6 +6,8 @@
         android:layout_height="match_parent">
 
 
+z
+
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/prices_recycler_view"
             android:layout_width="0dp"
