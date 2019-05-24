@@ -1,10 +1,8 @@
 package com.example.domain.usecase
 
-import androidx.lifecycle.LiveData
 import com.example.domain.util.Either
 import com.example.domain.util.Failure
 import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
 
 //todo test viewModelScope with println
 abstract class BaseUseCase<out T, in Params> where T: Any {
