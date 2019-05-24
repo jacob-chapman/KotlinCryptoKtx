@@ -49,4 +49,5 @@ class PriceAdapter(private val clickListener: ClickListener) : Adapter<PriceAdap
         }
         return this
     }
+
 }

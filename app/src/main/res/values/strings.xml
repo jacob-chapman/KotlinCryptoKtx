@@ -2,4 +2,5 @@
     <string name="app_name">KotlinCrypto-Ktx</string>
     <string name="placeholder">Placeholder</string>
     <string name="prices">Prices</string>
+    <string name="nomics_attribution">Some or all data provided by Nomics.com Cryptocurrency Market Data API</string>
 </resources>
