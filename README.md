@@ -1,4 +1,4 @@
-# KotlinCryptoKtx
+# Sandbox
 Android sample app with Arch Components and Kotlin Coroutine Support. Using a simple api (Nomics Api: https://nomics.com/) wanted to use build a sandbox Android application that allowed me to test out new features and libraries.
 # Main Goals
 - Kotlin Coroutines
