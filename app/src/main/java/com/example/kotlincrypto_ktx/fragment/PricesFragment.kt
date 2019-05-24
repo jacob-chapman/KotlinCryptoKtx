@@ -9,33 +9,20 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
-import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kotlincrypto_ktx.MainActivity
 import com.example.kotlincrypto_ktx.R
 import com.example.kotlincrypto_ktx.adapter.PriceAdapter
 import com.example.kotlincrypto_ktx.model.CurrencyModel
-import com.example.kotlincrypto_ktx.viewmodel.CurrenciesViewModel
-import kotlinx.android.synthetic.main.activity_main.*
-
+import com.example.kotlincrypto_ktx.viewmodel.CurrenciesNonLiveViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PricesFragment : Fragment(), PriceAdapter.ClickListener {
 
-    companion object {
-        fun newInstance() : PricesFragment {
-            return PricesFragment()
-        }
-    }
-
     private lateinit var recyclerView : RecyclerView
     private val pricesAdapter : PriceAdapter = PriceAdapter(this)
-    private val currenciesViewModel: CurrenciesViewModel by viewModel()
-
-
+    private val currenciesViewModel: CurrenciesNonLiveViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = LayoutInflater.from(this.context).inflate(R.layout.fragment_prices, container, false)
@@ -53,20 +40,19 @@ class PricesFragment : Fragment(), PriceAdapter.ClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycleScope.launchWhenStarted {
-            currenciesViewModel.loadCurrencies().observe(this@PricesFragment){
+        lifecycleScope.launchWhenStarted{
+            currenciesViewModel.load(false)
+            currenciesViewModel.currencyModels.observe(this@PricesFragment){
                 pricesAdapter.currencies = it
                 pricesAdapter.notifyDataSetChanged()
                 Log.d(this::class.java.canonicalName, "updating data set on ui adapter")
-                Log.d("PricesFragment", lifecycle.currentState.toString())
             }
-
         }
     }
 
     override fun onCurrencyClicked(currencyModel: CurrencyModel) {
         Log.d("Clicked:", currencyModel.name)
-        val action = PricesFragmentDirections.actionPricesFragmentToNavDashboard(currencyModel.name)
+        val action = PricesFragmentDirections.actionPricesNonLiveFragmentToDashboardFragmentMain(currencyModel.name)
         view!!.findNavController().navigate(action)
     }
 
@@ -75,5 +61,4 @@ class PricesFragment : Fragment(), PriceAdapter.ClickListener {
             outRect.bottom = 10
         }
     }
-
 }

@@ -20,12 +20,7 @@ import kotlin.coroutines.CoroutineContext
 import kotlin.system.exitProcess
 
 /**
- * This repo is an attempt to highlight any big differences between using LiveData in the Domain layer for clean arch.
- * The loadPricesLive method is the case for using LiveData in a module that is "platform" independent. Using the RepoParams class
- * a developer can tell what is desired. It can kick off the live updating functionality using a coroutine scope passed into the params.
- * This allows the client to determine how long the updating should go on for, or allow them to pass in the viewModelScope so that the internals can handle cancellation.
- *
- * The other function loadPricesNonLive appears to have less code in the repo, but more of the logic for looping lives in the view model. This could be a nice todo in order to figure out how it could be handled here
+ * The loadPrices appears to have less code in the repo, but more of the logic for looping lives in the view model. This could be a nice todo in order to figure out how it could be handled here
  * However, now it solely relies on the params to just say whether or not it should hit the api. It has no real clue about any live updating. As it needs to return a value at all times instead of a
  * live data object that can be updated from the repo layer
  */
@@ -43,24 +38,6 @@ class NomicRepository(private val nomicsApi: NomicsApi, private val nomicsDb: No
         Log.d(this::class.java.canonicalName, "adding/updating api response to db")
         if(dashboardResponse != null)
             nomicsDb.dashboardDao().insertAll(*dashboardResponse.toTypedArray())
-    }
-
-    override suspend fun loadPricesLive(params: RepoParams): Either<Failure, LiveData<List<Currency>>> {
-
-        return try {
-            Either.Success(liveData(Dispatchers.IO) {
-                    Log.d(this::class.java.canonicalName, "returning database source")
-                    emitSource(nomicsDb.pricesDao().getAllCurrencies().map { list -> list.map { ModelMapper.mapToCurrency(it) }})
-                    if(params.liveUpdate) {
-                        while(params.scope!!.isActive) {
-                            refreshPricesFromApi()
-                        }
-                    }
-                    return@liveData
-            })
-        } catch(exception: Throwable) {
-            Either.Error(Failure.ServerError)
-        }
     }
 
     private suspend fun pricesApiCall(updateDb: Boolean) : List<Currency> {
@@ -90,7 +67,7 @@ class NomicRepository(private val nomicsApi: NomicsApi, private val nomicsDb: No
             pricesApiCall(updateDb = true)
     }
 
-    override suspend fun loadPricesNonLive(params: RepoParams): Either<Failure, List<Currency>> {
+    override suspend fun loadPrices(params: RepoParams): Either<Failure, List<Currency>> {
         return try{
             if(params.refreshFromApi){
                 //client is telling us to refresh from the ui first

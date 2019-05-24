@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">KotlinCrypto-Ktx</string>
-    <string name="prices_livedata">Prices LiveData</string>
-    <string name="prices_nonlive">Prices NonLive</string>
+    <string name="placeholder">Placeholder</string>
+    <string name="prices">Prices</string>
 </resources>
