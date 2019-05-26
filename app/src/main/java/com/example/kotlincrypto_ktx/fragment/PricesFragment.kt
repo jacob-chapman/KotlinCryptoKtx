@@ -1,6 +1,5 @@
 package com.example.kotlincrypto_ktx.fragment
 
-import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
 import android.text.SpannableString
@@ -21,40 +20,51 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlincrypto_ktx.R
 import com.example.kotlincrypto_ktx.adapter.PriceAdapter
 import com.example.kotlincrypto_ktx.model.CurrencyModel
-import com.example.kotlincrypto_ktx.viewmodel.CurrenciesNonLiveViewModel
-import kotlinx.android.synthetic.main.fragment_prices.*
+import com.example.kotlincrypto_ktx.viewmodel.PricesViewModel
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import org.koin.androidx.scope.currentScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PricesFragment : Fragment(), PriceAdapter.ClickListener {
 
     private lateinit var recyclerView : RecyclerView
     private val pricesAdapter : PriceAdapter = PriceAdapter(this)
-    private val currenciesViewModel: CurrenciesNonLiveViewModel by viewModel()
+    private val pricesViewModel: PricesViewModel by viewModel()
     private lateinit var attributionText: AppCompatTextView
+    private lateinit var liveDataToggle: FloatingActionButton
+
+    //https://stackoverflow.com/questions/54581071/fragments-destroyed-recreated-with-jetpacks-android-navigation-components
+    private var _view: View? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = LayoutInflater.from(this.context).inflate(R.layout.fragment_prices, container, false)
 
-        recyclerView = view.findViewById(R.id.prices_recycler_view)
-        recyclerView.adapter = pricesAdapter
-        recyclerView.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
-        attributionText = view.findViewById(R.id.attribution_text)
-        val itemDecoration = ItemSpacing()
-        recyclerView.addItemDecoration(itemDecoration)
+        if(_view == null) {
+            _view = LayoutInflater.from(this.context).inflate(R.layout.fragment_prices, container, false)
 
-        return view
-    }
+            recyclerView = _view!!.findViewById(R.id.prices_recycler_view)
+            recyclerView.adapter = pricesAdapter
+            recyclerView.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
+            attributionText = _view!!.findViewById(R.id.attribution_text)
+            liveDataToggle = _view!!.findViewById(R.id.live_data_toggle)
+            liveDataToggle.setOnClickListener {
+                pricesViewModel.togglePolling()
+                it.isSelected = !it.isSelected
+            }
+            val itemDecoration = ItemSpacing()
+            recyclerView.addItemDecoration(itemDecoration)
+        } else {
+            //we already have state lets make sure we set the right state from the viewModel
+            liveDataToggle.isSelected = pricesViewModel.getPollingState()
+        }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
+        return _view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         lifecycleScope.launchWhenStarted{
-            currenciesViewModel.load(false)
-            currenciesViewModel.currencyModels.observe(this@PricesFragment){
+            pricesViewModel.currencyModels.observe(this@PricesFragment){
                 pricesAdapter.currencies = it
                 pricesAdapter.notifyDataSetChanged()
                 Log.d(this::class.java.canonicalName, "updating data set on ui adapter")
@@ -66,10 +76,6 @@ class PricesFragment : Fragment(), PriceAdapter.ClickListener {
         stringBuilder.setSpan(URLSpan("https://p.nomics.com/cryptocurrency-bitcoin-api"), startIndex, stringBuilder.length, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
         attributionText.text = stringBuilder
         attributionText.movementMethod = LinkMovementMethod.getInstance()
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
     override fun onCurrencyClicked(currencyModel: CurrencyModel) {

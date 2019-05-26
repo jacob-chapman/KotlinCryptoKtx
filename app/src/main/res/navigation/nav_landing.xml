@@ -2,14 +2,15 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/nav_main"
-            app:startDestination="@id/pricesNonLiveFragment">
+            app:startDestination="@id/pricesFragment">
 
-    <fragment android:id="@+id/pricesNonLiveFragment"
+    <fragment android:id="@+id/pricesFragment"
               android:name="com.example.kotlincrypto_ktx.fragment.PricesFragment"
-              android:label="PricesNonLiveFragment"
+              android:label="PricesFragment"
               tools:layout="@layout/fragment_prices">
         <action android:id="@+id/action_pricesNonLiveFragment_to_dashboardFragmentMain"
-                app:destination="@id/dashboardFragmentMain"/>
+                app:destination="@id/dashboardFragmentMain"
+                app:launchSingleTop="true"/>
     </fragment>
 
     <fragment android:id="@+id/dashboardFragmentMain"
@@ -17,6 +18,8 @@
               tools:layout="@layout/fragment_dashboard">
         <argument android:name="currencyName" app:argType="string"/>
     </fragment>
-    <fragment android:id="@+id/placeholder"/>
+    <fragment android:id="@+id/placeholderFragment"
+              android:name="com.example.kotlincrypto_ktx.fragment.PlaceholderFragment"
+              android:label="PlaceholderFragment"/>
 
 </navigation>
