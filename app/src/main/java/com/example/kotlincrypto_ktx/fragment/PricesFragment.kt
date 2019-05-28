@@ -20,16 +20,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlincrypto_ktx.R
 import com.example.kotlincrypto_ktx.adapter.PriceAdapter
 import com.example.kotlincrypto_ktx.model.CurrencyModel
-import com.example.kotlincrypto_ktx.viewmodel.PricesViewModel
+import com.example.kotlincrypto_ktx.utils.injector
+import com.example.kotlincrypto_ktx.utils.viewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import org.koin.androidx.scope.currentScope
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PricesFragment : Fragment(), PriceAdapter.ClickListener {
 
     private lateinit var recyclerView : RecyclerView
     private val pricesAdapter : PriceAdapter = PriceAdapter(this)
-    private val pricesViewModel: PricesViewModel by viewModel()
+    private val pricesViewModel by viewModel { injector.pricesViewModel}
     private lateinit var attributionText: AppCompatTextView
     private lateinit var liveDataToggle: FloatingActionButton
 
@@ -71,7 +70,7 @@ class PricesFragment : Fragment(), PriceAdapter.ClickListener {
             }
         }
 
-        var stringBuilder = SpannableStringBuilder(attributionText.text)
+        val stringBuilder = SpannableStringBuilder(attributionText.text)
         val startIndex = stringBuilder.indexOf("Cryptocurrency")
         stringBuilder.setSpan(URLSpan("https://p.nomics.com/cryptocurrency-bitcoin-api"), startIndex, stringBuilder.length, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
         attributionText.text = stringBuilder

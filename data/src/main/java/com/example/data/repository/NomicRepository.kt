@@ -16,6 +16,7 @@ import com.example.domain.util.Failure
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
+import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 import kotlin.system.exitProcess
 
@@ -24,7 +25,8 @@ import kotlin.system.exitProcess
  * However, now it solely relies on the params to just say whether or not it should hit the api. It has no real clue about any live updating. As it needs to return a value at all times instead of a
  * live data object that can be updated from the repo layer
  */
-class NomicRepository(private val nomicsApi: NomicsApi, private val nomicsDb: NomicsDb) : BaseRepository(), PricesRepository {
+class NomicRepository @Inject constructor(private val nomicsApi: NomicsApi,
+                                          private val nomicsDb: NomicsDb) : BaseRepository(), PricesRepository {
 
     //todo add repo and use case
     suspend fun getDashboardForCurrency(currency: String, coroutineContext: CoroutineContext) = liveData<Dashboard>(coroutineContext) {

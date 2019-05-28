@@ -6,8 +6,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.data.model.Dashboard
 import com.example.data.repository.NomicRepository
 import kotlinx.coroutines.Dispatchers
+import javax.inject.Inject
 
-class DashboardViewModel(private val nomicRepository: NomicRepository) : ViewModel() {
+class DashboardViewModel @Inject constructor(private val nomicRepository: NomicRepository) : ViewModel() {
 
 
     suspend fun loadDashboard(currencyName: String) : LiveData<Dashboard>{

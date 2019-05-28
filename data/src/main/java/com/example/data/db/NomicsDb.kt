@@ -12,7 +12,7 @@ import com.example.data.model.Dashboard
 @Database(
     entities = [Currency::class, Dashboard::class],
     version = 1)
-abstract class NomicsDb : RoomDatabase(){
+abstract class NomicsDb: RoomDatabase(){
 
     abstract fun pricesDao() : PricesDao
     abstract fun dashboardDao() : DashboardDao
