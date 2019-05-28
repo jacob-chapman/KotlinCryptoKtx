@@ -8,7 +8,7 @@ dependencies {
     implementation daggerDependencies.dagger
     kapt daggerDependencies.daggerKapt
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin_version}"
     testImplementation 'junit:junit:4.12'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutineVersion"
 }

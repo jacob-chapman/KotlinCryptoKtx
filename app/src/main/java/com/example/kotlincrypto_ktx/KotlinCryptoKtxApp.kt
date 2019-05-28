@@ -1,31 +1,12 @@
 package com.example.kotlincrypto_ktx
 
 import android.app.Application
-import com.example.data.di.DataModule
-import com.example.domain.usecase.GetPricesUseCase
-import com.example.kotlincrypto_ktx.viewmodel.PricesViewModel
-import com.example.kotlincrypto_ktx.viewmodel.DashboardViewModel
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.core.context.startKoin
-import org.koin.dsl.module
+import com.example.kotlincrypto_ktx.di.ApplicationComponent
+import com.example.kotlincrypto_ktx.di.ComponentProvider
+import com.example.kotlincrypto_ktx.di.DaggerApplicationComponent
 
-class KotlinCryptoKtxApp : Application() {
-
-    private val module = module {
-        viewModel { PricesViewModel(get()) }
-        viewModel { DashboardViewModel(get()) }
-        factory { GetPricesUseCase(get()) }
-    }
-
-    override fun onCreate() {
-        super.onCreate()
-
-        startKoin {
-            androidLogger()
-            androidContext(this@KotlinCryptoKtxApp)
-            modules(DataModule.module, module)
-        }
+class KotlinCryptoKtxApp : Application(), ComponentProvider {
+    override val applicationComponent: ApplicationComponent by lazy {
+        DaggerApplicationComponent.factory().create(this)
     }
 }

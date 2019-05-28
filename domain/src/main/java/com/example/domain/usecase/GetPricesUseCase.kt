@@ -5,7 +5,8 @@ import com.example.domain.params.RepoParams
 import com.example.domain.repository.PricesRepository
 import com.example.domain.util.Either
 import com.example.domain.util.Failure
+import javax.inject.Inject
 
-class GetPricesUseCase(private val pricesRepository: PricesRepository) : BaseUseCase<List<Currency>, RepoParams>(){
+class GetPricesUseCase @Inject constructor(private val pricesRepository: PricesRepository) : BaseUseCase<List<Currency>, RepoParams>(){
     override suspend fun execute(params: RepoParams): Either<Failure, List<Currency>>  = pricesRepository.loadPrices(params)
 }

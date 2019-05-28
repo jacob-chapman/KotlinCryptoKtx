@@ -11,6 +11,7 @@ import com.example.domain.usecase.GetPricesUseCase
 import com.example.domain.util.Failure
 import com.example.kotlincrypto_ktx.model.CurrencyModel
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
 /**
  * todo revisit documentation
@@ -22,7 +23,7 @@ import kotlinx.coroutines.*
  * the calls more granular. Or we can continue to use the RepoParams class to tell the repository what we want returned and continue using a
  * single use case.
  */
-class PricesViewModel(private val getPricesUseCase: GetPricesUseCase) : ViewModel() {
+class PricesViewModel @Inject constructor(private val getPricesUseCase: GetPricesUseCase) : ViewModel() {
 
 
     private var _currencyModels = MutableLiveData<List<CurrencyModel>>()
