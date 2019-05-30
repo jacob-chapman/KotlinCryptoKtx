@@ -1,9 +1,7 @@
 package com.example.data.repository
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
-import androidx.lifecycle.map
 import com.example.data.api.NomicsApi
 import com.example.data.db.NomicsDb
 import com.example.data.model.Dashboard
@@ -13,12 +11,9 @@ import com.example.domain.params.RepoParams
 import com.example.domain.repository.PricesRepository
 import com.example.domain.util.Either
 import com.example.domain.util.Failure
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
-import kotlin.system.exitProcess
 
 /**
  * The loadPrices appears to have less code in the repo, but more of the logic for looping lives in the view model. This could be a nice todo in order to figure out how it could be handled here

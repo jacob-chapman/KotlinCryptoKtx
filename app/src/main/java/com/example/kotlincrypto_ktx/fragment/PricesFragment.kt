@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlincrypto_ktx.R
 import com.example.kotlincrypto_ktx.adapter.PriceAdapter
 import com.example.kotlincrypto_ktx.model.CurrencyModel
+import com.example.kotlincrypto_ktx.utils.ItemSpacing
 import com.example.kotlincrypto_ktx.utils.injector
 import com.example.kotlincrypto_ktx.utils.viewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -49,7 +50,7 @@ class PricesFragment : Fragment(), PriceAdapter.ClickListener {
                 pricesViewModel.togglePolling()
                 it.isSelected = !it.isSelected
             }
-            val itemDecoration = ItemSpacing()
+            val itemDecoration = ItemSpacing(10)
             recyclerView.addItemDecoration(itemDecoration)
         } else {
             //we already have state lets make sure we set the right state from the viewModel
@@ -81,11 +82,5 @@ class PricesFragment : Fragment(), PriceAdapter.ClickListener {
         Log.d("Clicked:", currencyModel.name)
         val action = PricesFragmentDirections.actionPricesNonLiveFragmentToDashboardFragmentMain(currencyModel.name)
         view!!.findNavController().navigate(action)
-    }
-
-    class ItemSpacing : RecyclerView.ItemDecoration() {
-        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-            outRect.bottom = 10
-        }
     }
 }

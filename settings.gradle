@@ -1,2 +1,2 @@
-include ':app', ':data', ':domain'
+include ':app', ':nomics', ':domain', ':news'
 rootProject.name = 'Sandbox'

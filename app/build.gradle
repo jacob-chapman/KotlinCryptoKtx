@@ -34,7 +34,7 @@ dependencies {
     //order matter
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':domain')
-    implementation project(path: ':data')
+    implementation project(path: ':nomics')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta1'
@@ -63,6 +63,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.0.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.0.0'
     implementation "org.jetbrains.kotlin:kotlin-reflect:${kotlin_version}"
+    compile project(path: ':news')
 
 
 }

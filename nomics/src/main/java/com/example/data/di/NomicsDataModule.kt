@@ -7,6 +7,7 @@ import com.example.data.repository.NomicRepository
 import com.example.data.util.NomicsInterceptor
 import com.example.domain.repository.PricesRepository
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import dagger.BindsInstance
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
