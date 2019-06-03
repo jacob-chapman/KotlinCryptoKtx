@@ -4,4 +4,5 @@
     <string name="prices">Prices</string>
     <string name="nomics_attribution">Some or all data provided by Nomics.com Cryptocurrency Market Data API</string>
     <string name="us_news">US News</string>
+    <string name="title_newsfeature">News</string>
 </resources>

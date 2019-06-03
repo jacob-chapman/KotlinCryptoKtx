@@ -1,2 +1,0 @@
-include ':app', ':nomics', ':domain', ':news'
-rootProject.name = 'Sandbox'
