@@ -20,6 +20,7 @@ android{
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(project(Modules.app))
+    implementation(project(Modules.common_core))
 
     implementation(Libraries.kotlin)
     implementation("androidx.core:core-ktx:+")

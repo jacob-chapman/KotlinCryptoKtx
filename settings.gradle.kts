@@ -1,2 +1,2 @@
-include (":app", ":nomics", ":domain", ":news", ":newsfeature", ":buildSrc")
+include (":app", ":nomics", ":domain", ":news", ":newsfeature", ":buildSrc", ":common-core")
 rootProject.name = "Sandbox"

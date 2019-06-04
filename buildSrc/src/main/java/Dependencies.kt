@@ -10,6 +10,8 @@ object Modules {
     val nomics = ":nomics"
     val domain = ":domain"
     val newsFeature = ":newsfeature"
+
+    val common_core = ":common-core"
 }
 
 object Application {
