@@ -29,7 +29,7 @@ android {
         isEnabled = true
     }
 
-    dynamicFeatures = mutableSetOf(Modules.newsFeature)
+//    dynamicFeatures = mutableSetOf(Modules.newsFeature)
 }
 
 dependencies {

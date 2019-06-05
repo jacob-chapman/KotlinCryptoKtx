@@ -2,16 +2,15 @@
 object Modules {
     val app = ":app"
     val news = ":news"
-    val crypto = ":crypto"
-
-    val network = ":core:network"
-    val cache = ":core:cache"
 
     val nomics = ":nomics"
     val domain = ":domain"
     val newsFeature = ":newsfeature"
 
-    val common_core = ":common-core"
+    val common_core = ":core"
+    val common_network = ":network"
+
+    val buildSrc = ":buildSrc"
 }
 
 object Application {

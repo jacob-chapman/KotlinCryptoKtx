@@ -16,4 +16,7 @@ dependencies {
 
     //Kotlin Coroutines
     implementation(Libraries.coroutinesCore)
+
+    testImplementation(TestLibraries.junit)
+
 }
