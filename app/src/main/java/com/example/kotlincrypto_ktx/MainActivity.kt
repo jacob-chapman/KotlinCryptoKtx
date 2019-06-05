@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         val hostFragment = supportFragmentManager.findFragmentById(R.id.fragment_main_nav_host) as NavHostFragment
         val navController = hostFragment.navController
-        navController.addOnDestinationChangedListener { controller, destination, _ ->
+        navController.addOnDestinationChangedListener { _, destination, _ ->
             Log.d("Destination Changed", destination.label.toString())
             when(destination.id){
                  R.id.dashboardFragmentMain -> {

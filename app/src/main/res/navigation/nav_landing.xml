@@ -18,8 +18,8 @@
               tools:layout="@layout/fragment_dashboard">
         <argument android:name="currencyName" app:argType="string"/>
     </fragment>
-    <fragment android:id="@+id/placeholderFragment"
-              android:name="com.example.kotlincrypto_ktx.fragment.PlaceholderFragment"
-              android:label="PlaceholderFragment"/>
+    <fragment android:id="@+id/newsFragment" android:name="com.example.kotlincrypto_ktx.fragment.UsNewsFragment"
+              android:label="UsNewsFragment"/>
+    <include app:graph="@navigation/nav_news"/>
 
 </navigation>

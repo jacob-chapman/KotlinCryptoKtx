@@ -5,7 +5,7 @@
         android:title="@string/prices"
         android:icon="@drawable/plus_one"/>
     <item
-        android:id="@+id/placeholderFragment"
-        android:title="@string/placeholder"
+        android:id="@+id/nav_news"
+        android:title="@string/us_news"
         android:icon="@drawable/home"/>
 </menu>

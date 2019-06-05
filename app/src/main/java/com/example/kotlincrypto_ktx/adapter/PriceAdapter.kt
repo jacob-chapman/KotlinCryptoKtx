@@ -18,7 +18,7 @@ class PriceAdapter(private val clickListener: ClickListener) : Adapter<PriceAdap
         val layoutInflater = LayoutInflater.from(parent.context)
         //extremely important to add all params to the inflate call
         val binding = CurrencyItemBinding.inflate(layoutInflater, parent, false)
-        return PricesViewHolder(binding).listen { position, type ->
+        return PricesViewHolder(binding).listen { position, _ ->
             val item = currencies[position]
             clickListener.onCurrencyClicked(item)
         }

@@ -8,10 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
+import com.example.android.injector
+import com.example.android.viewModel
 import com.example.kotlincrypto_ktx.databinding.FragmentDashboardBinding
+import com.example.kotlincrypto_ktx.di.ApplicationComponent
 import com.example.kotlincrypto_ktx.model.DashboardModel
-import com.example.kotlincrypto_ktx.utils.injector
-import com.example.kotlincrypto_ktx.utils.viewModel
 import com.example.kotlincrypto_ktx.viewmodel.DashboardViewModel
 
 class DashboardFragment : Fragment() {
@@ -30,7 +31,7 @@ class DashboardFragment : Fragment() {
     }
 
     private val args: DashboardFragmentArgs by navArgs()
-    private val dashboardViewModel: DashboardViewModel by viewModel { injector.dashboardViewModel }
+    private val dashboardViewModel: DashboardViewModel by viewModel { injector<ApplicationComponent>().dashboardViewModel }
     private lateinit var binding: FragmentDashboardBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
