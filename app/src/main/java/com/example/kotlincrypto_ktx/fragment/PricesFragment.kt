@@ -1,6 +1,5 @@
 package com.example.kotlincrypto_ktx.fragment
 
-import android.graphics.Rect
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
@@ -17,19 +16,20 @@ import androidx.lifecycle.observe
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.android.ItemSpacing
+import com.example.android.injector
+import com.example.android.viewModel
 import com.example.kotlincrypto_ktx.R
 import com.example.kotlincrypto_ktx.adapter.PriceAdapter
+import com.example.kotlincrypto_ktx.di.ApplicationComponent
 import com.example.kotlincrypto_ktx.model.CurrencyModel
-import com.example.kotlincrypto_ktx.utils.ItemSpacing
-import com.example.kotlincrypto_ktx.utils.injector
-import com.example.kotlincrypto_ktx.utils.viewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class PricesFragment : Fragment(), PriceAdapter.ClickListener {
 
     private lateinit var recyclerView : RecyclerView
     private val pricesAdapter : PriceAdapter = PriceAdapter(this)
-    private val pricesViewModel by viewModel { injector.pricesViewModel}
+    private val pricesViewModel by viewModel { injector<ApplicationComponent>().pricesViewModel }
     private lateinit var attributionText: AppCompatTextView
     private lateinit var liveDataToggle: FloatingActionButton
 

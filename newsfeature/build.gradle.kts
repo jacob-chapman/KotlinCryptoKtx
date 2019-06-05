@@ -15,6 +15,10 @@ android{
         versionCode = Release.versionCode
         versionName = Release.versionName
     }
+
+    dataBinding{
+        isEnabled = true
+    }
 }
 
 dependencies {
@@ -22,12 +26,15 @@ dependencies {
 
     implementation(project(Modules.common_core))
     implementation(project(Modules.common_network))
+    implementation(project(Modules.common_android))
 
     implementation(Libraries.kotlin)
     implementation(Libraries.androidKtx)
 
     implementation(Libraries.dagger)
     kapt(Libraries.daggerCompiler)
+
+    implementation("com.google.code.findbugs:jsr305:3.0.2")
 
     implementation(Libraries.liveDataKtx)
     implementation(Libraries.liveDataCore)

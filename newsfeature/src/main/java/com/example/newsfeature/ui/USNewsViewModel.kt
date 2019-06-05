@@ -1,14 +1,14 @@
-package com.example.kotlincrypto_ktx.viewmodel
+package com.example.newsfeature.ui
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.entity.NewsArticle
-import com.example.domain.usecase.BaseUseCase
-import com.example.domain.usecase.GetUSNewsUseCase
-import com.example.domain.util.Failure
+import com.example.newsfeature.domain.entity.NewsArticle
+import com.example.newsfeature.domain.usecase.GetUSNewsUseCase
+import core.BaseUseCase
+import core.Failure
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

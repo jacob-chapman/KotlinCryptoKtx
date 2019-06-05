@@ -9,8 +9,9 @@ import com.example.newsfeature.data.api.NewsApi
 import com.example.newsfeature.domain.entity.NewsArticle
 import com.example.newsfeature.domain.repo.NewsRepository
 import com.example.newsfeature.util.ModelMapper
+import javax.inject.Inject
 
-class NewsRepositoryImpl(private val newsApi: NewsApi) : BaseRepository(), NewsRepository {
+class NewsRepositoryImpl @Inject constructor(private val newsApi: NewsApi) : BaseRepository(), NewsRepository {
 
     override suspend fun loadUsNews(params: BaseUseCase.None): Either<Failure, List<NewsArticle>> {
         Log.d(this::class.java.canonicalName, "Loading US News")

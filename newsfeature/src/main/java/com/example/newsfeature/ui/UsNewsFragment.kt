@@ -1,4 +1,4 @@
-package com.example.kotlincrypto_ktx.fragment
+package com.example.newsfeature.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,18 +10,17 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kotlincrypto_ktx.R
-import com.example.kotlincrypto_ktx.adapter.NewsAdapter
-import com.example.kotlincrypto_ktx.utils.ItemSpacing
-import com.example.kotlincrypto_ktx.utils.injector
-import com.example.kotlincrypto_ktx.utils.viewModel
-import com.example.kotlincrypto_ktx.viewmodel.USNewsViewModel
+import com.example.android.ItemSpacing
+import com.example.android.injector
+import com.example.android.viewModel
+import com.example.newsfeature.R
+import com.example.newsfeature.di.NewsFeatureComponent
 import kotlinx.android.synthetic.main.fragment_news.*
 
 class UsNewsFragment : Fragment() {
 
     private val recyclerView: RecyclerView by lazy { news_recycler }
-    private val usNewsViewModel by viewModel { injector.usNewsViewModel}
+    private val usNewsViewModel by viewModel { injector<NewsFeatureComponent>().newsViewModel }
     private val newsAdapter: NewsAdapter by lazy { NewsAdapter() }
 
     //https://stackoverflow.com/questions/54581071/fragments-destroyed-recreated-with-jetpacks-android-navigation-components

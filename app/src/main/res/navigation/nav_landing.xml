@@ -20,5 +20,6 @@
     </fragment>
     <fragment android:id="@+id/newsFragment" android:name="com.example.kotlincrypto_ktx.fragment.UsNewsFragment"
               android:label="UsNewsFragment"/>
+    <include app:graph="@navigation/nav_news"/>
 
 </navigation>

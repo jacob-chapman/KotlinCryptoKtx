@@ -37,7 +37,9 @@ dependencies {
 
     implementation(project(Modules.nomics))
     implementation(project(Modules.domain))
-    implementation(project(Modules.news))
+    implementation(project(Modules.newsFeature))
+    implementation(project(Modules.common_network))
+    implementation(project(Modules.common_android))
 
     implementation(Libraries.kotlin)
     implementation(SupportLibraries.constraintLayout)

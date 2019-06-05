@@ -9,6 +9,7 @@ object Modules {
 
     val common_core = ":core"
     val common_network = ":network"
+    val common_android = ":android"
 
     val buildSrc = ":buildSrc"
 }

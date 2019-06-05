@@ -11,8 +11,8 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 @Module
-abstract class NetworkModule(private val apiBase: String,
-                    private val interceptor: Interceptor? = null) {
+class NetworkModule(private val apiBase: String,
+                    private val interceptor: Interceptor) {
 
 
     @Reusable
@@ -20,11 +20,11 @@ abstract class NetworkModule(private val apiBase: String,
     fun providesMoshiConverter() : MoshiConverterFactory =
             MoshiConverterFactory.create()
 
-    @Singleton
+    @Reusable
     @Provides
     fun providesOkHttpClient() : OkHttpClient {
         val builder = OkHttpClient.Builder()
-        interceptor?.let {
+        interceptor.let {
             builder.addInterceptor(it)
         }
         return builder.build()

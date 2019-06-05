@@ -1,4 +1,4 @@
-package com.example.kotlincrypto_ktx.utils
+package com.example.android
 
 import android.graphics.Rect
 import android.view.View

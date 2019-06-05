@@ -32,14 +32,15 @@ dependencies {
     implementation(Libraries.kotlin)
     implementation(SupportLibraries.appCompat)
 
+    //Room
+    api(Libraries.roomRuntime)
+    implementation(Libraries.roomKtx)
+    kapt(Libraries.roomCompiler)
+
     testImplementation(TestLibraries.junit)
     androidTestImplementation(TestLibraries.androidJunit)
     androidTestImplementation(TestLibraries.espresso)
 
-    //Room
-    implementation(Libraries.roomRuntime)
-    implementation(Libraries.roomKtx)
-    kapt(Libraries.roomCompiler)
 
     //Dagger
     implementation(Libraries.dagger)
