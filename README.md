@@ -20,7 +20,12 @@ The data layer is where the repository implementation is defined and where the d
 
 #### News Feature
 The news feature is implemented using a single module to host the entire Clean Architecture structure. Inside that module are different packages to define which part we are working in (data, domain, ui). Each section is similar to how the price feature is set up in different modules. 
---- WIP
+Still allows the ability to test each layer individually if desired by setting up tests in that android library. Can isolate the tests to that specific module. Separates features into vertical slices.
+
+##### Sources:
+  - https://medium.com/androiddevelopers/a-patchwork-plaid-monolith-to-modularized-app-60235d9f212e
+  - https://medium.com/androiddevelopers/dependency-injection-in-a-multi-module-project-1a09511c14b7
+  - https://proandroiddev.com/intro-to-app-modularization-42411e4c421e
 
 # Main Goals
 - Kotlin Coroutines
