@@ -41,7 +41,7 @@ Still allows the ability to test each layer individually if desired by setting u
 - Mvvm with Clean Architecture 
   - Develop the app according to this structure: https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
 - CircleCI
-  - Provide a way for continous integration using CircleCI
+  - Provide a way for continuous integration using CircleCI
 
 # Dagger 
 ###### 6/5/19
